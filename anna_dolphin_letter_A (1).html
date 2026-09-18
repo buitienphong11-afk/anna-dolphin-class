@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anna's Dolphin Class — Letter A</title>
+<style>
+:root{--blue:#1689d8;--navy:#15509a;--pink:#ff6fa8;--yellow:#ffd85a;--mint:#dff8ed;--cream:#fffaf0}
+*{box-sizing:border-box} body{margin:0;font-family:"Trebuchet MS",Arial,sans-serif;background:linear-gradient(#c9f2ff,#fff7d9);color:#163a63}
+.app{max-width:1050px;margin:auto;min-height:100vh;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-size:clamp(24px,5vw,46px);font-weight:900;color:var(--navy)} .stars{font-size:24px;background:#fff;border-radius:30px;padding:9px 16px;box-shadow:0 5px 14px #0001}
+.progress{height:13px;background:#fff;border-radius:20px;overflow:hidden;margin:12px 0 20px}.bar{height:100%;width:0;background:linear-gradient(90deg,#4ac6ff,#ffd24d);transition:.3s}
+.card{background:#fffdf8;border:4px solid #fff;border-radius:30px;padding:clamp(18px,4vw,36px);box-shadow:0 12px 30px #2a6c9d22;min-height:600px;display:none;text-align:center}.card.active{display:block}
+h1{font-size:clamp(30px,6vw,58px);margin:6px;color:var(--navy)}h2{font-size:clamp(24px,4vw,38px);margin:8px}p{font-size:clamp(18px,2.5vw,25px)}
+.hero{font-size:120px;animation:bob 2s infinite ease-in-out}@keyframes bob{50%{transform:translateY(-10px)}}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-top:22px}
+.tile{border:3px solid #c9eaff;border-radius:24px;background:#fff;padding:15px;cursor:pointer;transition:.15s;min-height:180px}.tile:hover,.tile:active{transform:scale(1.04);border-color:#63c8ff}.emoji{font-size:72px}.word{font-size:25px;font-weight:900}.meaning{font-size:16px;color:#62758a}
+button{border:0;border-radius:22px;padding:13px 22px;font-size:20px;font-weight:900;cursor:pointer;background:var(--blue);color:white;box-shadow:0 5px 0 #0e66a4;margin:7px}button:active{transform:translateY(3px);box-shadow:0 2px 0 #0e66a4}.secondary{background:#ff8cb7;box-shadow:0 5px 0 #d95587}
+.nav{display:flex;justify-content:space-between;margin-top:18px}.bigA{font-size:160px;font-weight:900;color:var(--pink);line-height:1}.sound{font-size:30px;background:#fff0f6;border-radius:20px;padding:15px}
+.sentence{font-size:clamp(25px,4vw,42px);background:#eef9ff;padding:20px;border-radius:25px;margin:20px auto;max-width:780px}
+.choice{font-size:70px}.feedback{font-size:28px;font-weight:900;min-height:40px}.trace{font-size:110px;letter-spacing:20px;color:#ff8db7;text-shadow:2px 2px #ffe0eb}
+.badge{display:inline-block;background:#fff1a8;border-radius:50%;padding:25px;font-size:70px}.small{font-size:16px;color:#687b8e}
+@media(max-width:600px){.card{min-height:680px}.grid{grid-template-columns:repeat(2,1fr)}.tile{min-height:150px}.emoji{font-size:55px}}
+</style>
+</head>
+<body><div class="app">
+<div class="top"><div class="brand">🐬 Anna's Dolphin Class</div><div class="stars">⭐ <span id="score">0</span></div></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+
+<section class="card active">
+<div class="hero">🐬</div><h1>Letter A Adventure!</h1>
+<p>Hello, Anna! Today we will meet the letter <b>A</b>, learn fun words, listen, speak and play!</p>
+<button onclick="speak('Hello Anna! Are you ready to learn the letter A?')">🔊 Hello!</button><br>
+<button onclick="next()">Let's learn! 🚀</button>
+</section>
+
+<section class="card">
+<h2>1. Meet Letter A</h2><div class="bigA">A a</div>
+<div class="sound">A can make the sound <b>/æ/</b> like in <b>apple</b>.</div>
+<div class="grid">
+<div class="tile" onclick="speak('A. Apple.')"><div class="emoji">🍎</div><div class="word">A is for Apple</div>🔊</div>
+<div class="tile" onclick="speak('A. Ant.')"><div class="emoji">🐜</div><div class="word">A is for Ant</div>🔊</div>
+</div>
+<p class="small">Parent tip: Ask her to repeat “A – apple” and “A – ant” slowly.</p>
+</section>
+
+<section class="card">
+<h2>2. New Words</h2><p>Tap each picture to hear the word.</p>
+<div class="grid" id="words"></div>
+</section>
+
+<section class="card">
+<h2>3. Listen & Repeat 👂</h2><p>Listen, then say it together.</p>
+<div class="grid" id="repeat"></div>
+<button onclick="speak('apple, ant, airplane, alligator, astronaut, ambulance')">🔊 Play all</button>
+</section>
+
+<section class="card">
+<h2>4. Speaking Time 💬</h2><div class="emoji">🍎</div>
+<div class="sentence">What is this?</div>
+<button onclick="speak('What is this?')">🔊 Question</button>
+<div class="sentence">It is <b>an apple.</b></div>
+<button onclick="speak('It is an apple.')">🔊 Answer</button>
+<p>Now try with: 🐜 ant &nbsp; ✈️ airplane</p>
+</section>
+
+<section class="card">
+<h2>5. Trace & Say ✏️</h2><p>Use your finger to trace the letters in the air.</p>
+<div class="trace">A A A</div><div class="trace">a a a</div>
+<button onclick="speak('A, A, A. Apple. Ant.')">🔊 Trace and say</button>
+<p>Big A → <b>A</b> &nbsp;&nbsp; Small a → <b>a</b></p>
+</section>
+
+<section class="card">
+<h2>6. Let's Read 📖</h2>
+<div class="sentence">Anna has an apple.<br>An ant sees the apple.<br>The ant is very small.<br>Anna says, “Hello, ant!”</div>
+<button onclick="speak('Anna has an apple. An ant sees the apple. The ant is very small. Anna says, Hello, ant!')">🔊 Read to me</button>
+<p class="small">Read once for Anna. Then point to <b>A / a</b> together.</p>
+</section>
+
+<section class="card">
+<h2>7. Find the A Words! 🔎</h2><p>Which pictures start with A?</p>
+<div class="grid">
+<div class="tile choice" onclick="quiz(this,true,'Apple starts with A!')">🍎<div class="word">apple</div></div>
+<div class="tile choice" onclick="quiz(this,false,'Ball starts with B. Try again!')">⚽<div class="word">ball</div></div>
+<div class="tile choice" onclick="quiz(this,true,'Ant starts with A!')">🐜<div class="word">ant</div></div>
+<div class="tile choice" onclick="quiz(this,false,'Kite starts with K. Try again!')">🪁<div class="word">kite</div></div>
+</div><div class="feedback" id="fb"></div>
+</section>
+
+<section class="card">
+<h2>8. Listening Game 🎧</h2><p>Listen. Then tap the correct picture.</p>
+<button onclick="speak('airplane')">🔊 Listen</button>
+<div class="grid">
+<div class="tile choice" onclick="quiz(this,false,'That is a rocket. Try again!')">🚀</div>
+<div class="tile choice" onclick="quiz(this,true,'Yes! Airplane!')">✈️</div>
+<div class="tile choice" onclick="quiz(this,false,'That is a train. Try again!')">🚂</div>
+</div><div class="feedback" id="fb2"></div>
+</section>
+
+<section class="card">
+<div class="badge">🏆</div><h1>Great Job, Anna!</h1>
+<p>You learned the letter <b>A</b> and six new A words!</p>
+<div class="sentence">🍎 apple · 🐜 ant · ✈️ airplane<br>🐊 alligator · 👩‍🚀 astronaut · 🚑 ambulance</div>
+<button onclick="speak('Amazing job, Anna! You learned the letter A. See you next time!')">🔊 Celebration</button>
+<button class="secondary" onclick="restart()">Play again 🔄</button>
+</section>
+
+<div class="nav"><button class="secondary" onclick="prev()">← Back</button><button onclick="next()">Next →</button></div>
+</div>
+<script>
+const data=[
+['🍎','apple','quả táo'],['🐜','ant','con kiến'],['✈️','airplane','máy bay'],
+['🐊','alligator','cá sấu Mỹ'],['👩‍🚀','astronaut','phi hành gia'],['🚑','ambulance','xe cứu thương']
+];
+let page=0, score=0; const cards=[...document.querySelectorAll('.card')];
+function speak(t){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.72;u.pitch=1.08;speechSynthesis.speak(u)}
+function show(){cards.forEach((c,i)=>c.classList.toggle('active',i===page));document.getElementById('bar').style.width=((page+1)/cards.length*100)+'%';scrollTo({top:0,behavior:'smooth'})}
+function next(){if(page<cards.length-1){page++;show()}}
+function prev(){if(page>0){page--;show()}}
+function addStar(){score++;document.getElementById('score').textContent=score}
+function quiz(el,ok,msg){let f=el.closest('.card').querySelector('.feedback');f.textContent=ok?'⭐ '+msg:'🙂 '+msg;speak(msg);if(ok&&!el.dataset.done){el.dataset.done=1;addStar()}}
+function restart(){page=0;score=0;document.getElementById('score').textContent=0;document.querySelectorAll('[data-done]').forEach(x=>delete x.dataset.done);show()}
+document.getElementById('words').innerHTML=data.map(x=>`<div class="tile" onclick="speak('${x[1]}')"><div class="emoji">${x[0]}</div><div class="word">${x[1]}</div><div class="meaning">${x[2]}</div><div>🔊</div></div>`).join('');
+document.getElementById('repeat').innerHTML=data.map(x=>`<div class="tile" onclick="speak('${x[1]}')"><div class="emoji">${x[0]}</div><div class="word">${x[1]}</div><div>🔊 Listen & repeat</div></div>`).join('');
+show();
+</script></body></html>
