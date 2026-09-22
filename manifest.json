@@ -1,0 +1,282 @@
+[
+  {
+    "ipa": "/ɑː/",
+    "file": "audio/phonemes/ah.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 3.767,
+    "end": 4.192
+  },
+  {
+    "ipa": "/ʌ/",
+    "file": "audio/phonemes/uh.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 7.11,
+    "end": 7.398
+  },
+  {
+    "ipa": "/æ/",
+    "file": "audio/phonemes/ae.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 10.709,
+    "end": 11.019
+  },
+  {
+    "ipa": "/ɛ/",
+    "file": "audio/phonemes/eh.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 14.697,
+    "end": 15.017
+  },
+  {
+    "ipa": "/iː/",
+    "file": "audio/phonemes/ee.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 19.726,
+    "end": 20.28
+  },
+  {
+    "ipa": "/ɪ/",
+    "file": "audio/phonemes/ih.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 23.938,
+    "end": 24.287
+  },
+  {
+    "ipa": "/ə/",
+    "file": "audio/phonemes/schwa.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 28.016,
+    "end": 28.697
+  },
+  {
+    "ipa": "/ɔː/",
+    "file": "audio/phonemes/aw.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 36.471,
+    "end": 36.99
+  },
+  {
+    "ipa": "/uː/",
+    "file": "audio/phonemes/oo.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 44.658,
+    "end": 45.319
+  },
+  {
+    "ipa": "/ʊ/",
+    "file": "audio/phonemes/uu-short.mp3",
+    "source": "MONOPHTHONG.m4a",
+    "start": 49.122,
+    "end": 49.459
+  },
+  {
+    "ipa": "/aɪ/",
+    "file": "audio/phonemes/eye.mp3",
+    "source": "DIPHTHONG.m4a",
+    "start": 4.884,
+    "end": 5.514
+  },
+  {
+    "ipa": "/aʊ/",
+    "file": "audio/phonemes/ow.mp3",
+    "source": "DIPHTHONG.m4a",
+    "start": 9.143,
+    "end": 9.894
+  },
+  {
+    "ipa": "/oʊ/",
+    "file": "audio/phonemes/oh.mp3",
+    "source": "DIPHTHONG.m4a",
+    "start": 14.538,
+    "end": 15.116
+  },
+  {
+    "ipa": "/eɪ/",
+    "file": "audio/phonemes/ay.mp3",
+    "source": "DIPHTHONG.m4a",
+    "start": 19.677,
+    "end": 20.354
+  },
+  {
+    "ipa": "/ɛr/",
+    "file": "audio/phonemes/air.mp3",
+    "source": "DIPHTHONG.m4a",
+    "start": 25.184,
+    "end": 25.622
+  },
+  {
+    "ipa": "/ɪr/",
+    "file": "audio/phonemes/ear.mp3",
+    "source": "DIPHTHONG.m4a",
+    "start": 30.723,
+    "end": 31.241
+  },
+  {
+    "ipa": "/ɔɪ/",
+    "file": "audio/phonemes/oy.mp3",
+    "source": "DIPHTHONG.m4a",
+    "start": 36.222,
+    "end": 36.846
+  },
+  {
+    "ipa": "/ʊr/",
+    "file": "audio/phonemes/oor.mp3",
+    "source": "DIPHTHONG.m4a",
+    "start": 41.128,
+    "end": 41.569
+  },
+  {
+    "ipa": "/b/",
+    "file": "audio/phonemes/b.mp3",
+    "source": "Consonants.m4a",
+    "start": 3.898,
+    "end": 4.26
+  },
+  {
+    "ipa": "/d/",
+    "file": "audio/phonemes/d.mp3",
+    "source": "Consonants.m4a",
+    "start": 7.638,
+    "end": 8.019
+  },
+  {
+    "ipa": "/ð/",
+    "file": "audio/phonemes/th-voiced.mp3",
+    "source": "Consonants.m4a",
+    "start": 12.127,
+    "end": 12.617
+  },
+  {
+    "ipa": "/θ/",
+    "file": "audio/phonemes/th-unvoiced.mp3",
+    "source": "Consonants.m4a",
+    "start": 17.892,
+    "end": 18.236
+  },
+  {
+    "ipa": "/dʒ/",
+    "file": "audio/phonemes/j.mp3",
+    "source": "Consonants.m4a",
+    "start": 22.59,
+    "end": 22.967
+  },
+  {
+    "ipa": "/f/",
+    "file": "audio/phonemes/f.mp3",
+    "source": "Consonants.m4a",
+    "start": 27.224,
+    "end": 27.667
+  },
+  {
+    "ipa": "/g/",
+    "file": "audio/phonemes/g.mp3",
+    "source": "Consonants.m4a",
+    "start": 31.939,
+    "end": 32.216
+  },
+  {
+    "ipa": "/h/",
+    "file": "audio/phonemes/h.mp3",
+    "source": "Consonants.m4a",
+    "start": 35.577,
+    "end": 35.97
+  },
+  {
+    "ipa": "/k/",
+    "file": "audio/phonemes/k.mp3",
+    "source": "Consonants.m4a",
+    "start": 44.067,
+    "end": 44.32
+  },
+  {
+    "ipa": "/l/",
+    "file": "audio/phonemes/l.mp3",
+    "source": "Consonants.m4a",
+    "start": 48.675,
+    "end": 49.0
+  },
+  {
+    "ipa": "/m/",
+    "file": "audio/phonemes/m.mp3",
+    "source": "Consonants.m4a",
+    "start": 53.065,
+    "end": 53.611
+  },
+  {
+    "ipa": "/n/",
+    "file": "audio/phonemes/n.mp3",
+    "source": "Consonants.m4a",
+    "start": 57.271,
+    "end": 57.724
+  },
+  {
+    "ipa": "/ŋ/",
+    "file": "audio/phonemes/ng.mp3",
+    "source": "Consonants.m4a",
+    "start": 61.927,
+    "end": 62.596
+  },
+  {
+    "ipa": "/p/",
+    "file": "audio/phonemes/p.mp3",
+    "source": "Consonants.m4a",
+    "start": 66.476,
+    "end": 66.965
+  },
+  {
+    "ipa": "/r/",
+    "file": "audio/phonemes/r.mp3",
+    "source": "Consonants.m4a",
+    "start": 70.691,
+    "end": 71.226
+  },
+  {
+    "ipa": "/s/",
+    "file": "audio/phonemes/s.mp3",
+    "source": "Consonants.m4a",
+    "start": 75.367,
+    "end": 76.295
+  },
+  {
+    "ipa": "/ʃ/",
+    "file": "audio/phonemes/sh.mp3",
+    "source": "Consonants.m4a",
+    "start": 78.886,
+    "end": 79.708
+  },
+  {
+    "ipa": "/t/",
+    "file": "audio/phonemes/t.mp3",
+    "source": "Consonants.m4a",
+    "start": 88.338,
+    "end": 88.699
+  },
+  {
+    "ipa": "/tʃ/",
+    "file": "audio/phonemes/ch.mp3",
+    "source": "Consonants.m4a",
+    "start": 93.524,
+    "end": 93.902
+  },
+  {
+    "ipa": "/v/",
+    "file": "audio/phonemes/v.mp3",
+    "source": "Consonants.m4a",
+    "start": 98.526,
+    "end": 98.881
+  },
+  {
+    "ipa": "/w/",
+    "file": "audio/phonemes/w.mp3",
+    "source": "Consonants.m4a",
+    "start": 102.067,
+    "end": 102.709
+  },
+  {
+    "ipa": "/z/",
+    "file": "audio/phonemes/z.mp3",
+    "source": "Consonants.m4a",
+    "start": 105.391,
+    "end": 106.006
+  }
+]

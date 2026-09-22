@@ -21,24 +21,86 @@ function rates(){if(speedMode==="slow")return isIOS?{word:.40,sound:.38,blend:.3
 function utter(t,r){return new Promise(done=>{let u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=r??rates().word;u.pitch=1.05;if(voice)u.voice=voice;u.onend=done;u.onerror=done;speechSynthesis.speak(u)})}
 function say(t,r){speechSynthesis.cancel();setTimeout(()=>utter(t,r??rates().word),50)}
 function setSpeed(m){speedMode=m;localStorage.setItem("elsaVoiceSpeed",m);render()}
+
+const PHONEME_AUDIO={
+  "/b/":"b","/d/":"d","/f/":"f","/ɡ/":"g","/h/":"h","/k/":"k","/l/":"l","/m/":"m",
+  "/n/":"n","/p/":"p","/r/":"r","/s/":"s","/t/":"t","/v/":"v","/w/":"w","/z/":"z",
+  "/æ/":"ae","/ɛ/":"eh","/ɪ/":"ih","/ɑ/":"ah","/ɔ/":"aw","/ʌ/":"uh","/ə/":"schwa",
+  "/i/":"ee","/u/":"oo","/eɪ/":"ay","/aɪ/":"eye","/oʊ/":"oh","/aʊ/":"ow",
+  "/ʃ/":"sh","/tʃ/":"ch","/dʒ/":"j","/θ/":"th-unvoiced","/ð/":"th-voiced","/ŋ/":"ng",
+  "/ɝ/":"er-stressed","/ɚ/":"er","/ɛr/":"air","/ɪr/":"ear","/ɑr/":"ar","/ɔr/":"or",
+  "/ks/":"ks","/əl/":"ul","/ən/":"un","/ju/":"you",
+
+  "/ɑː/":"ah","/ɔː/":"aw","/iː/":"ee","/uː/":"oo","/ʊ/":"uu-short",
+  "/ɔɪ/":"oy","/ʊr/":"oor",
+};
+let phonemePlayer=null;
+function phonemeFile(ipa){
+  let id=PHONEME_AUDIO[ipa];
+  return id ? `audio/phonemes/${id}.mp3` : null;
+}
+function playPhoneme(ipa){
+  return new Promise(resolve=>{
+    let file=phonemeFile(ipa);
+    if(!file){ resolve(false); return; }
+    try{
+      if(phonemePlayer){ phonemePlayer.pause(); phonemePlayer.currentTime=0; }
+      phonemePlayer=new Audio(file);
+      phonemePlayer.preload="auto";
+      phonemePlayer.onended=()=>resolve(true);
+      phonemePlayer.onerror=()=>resolve(false);
+      let p=phonemePlayer.play();
+      if(p&&p.catch)p.catch(()=>resolve(false));
+    }catch(e){ resolve(false); }
+  });
+}
 function sound(j){
-  let a=T.items[i];
-  speechSynthesis.cancel();
-  say(a[2].toLowerCase(),Math.max(.34,rates().sound-.08));
+  let z=T.items[i][6][j];
+  playPhoneme(z[1]).then(ok=>{
+    let m=document.getElementById("phonicsNote");
+    if(!ok && m)m.textContent="🔇 Âm riêng chưa có recording chuẩn. Nhìn chữ + IPA, rồi bấm BLEND.";
+    else if(ok && m)m.textContent=`🎧 ${z[0]} ${z[1]}`;
+  });
 }
 async function blend(){
   speechSynthesis.cancel();
   let a=T.items[i],r=rates();
-  await utter(a[2].toLowerCase(),Math.max(.32,r.blend-.08));
-  await new Promise(x=>setTimeout(x,320));
+
+  async function exists(file){
+    if(!file)return false;
+    try{
+      let res=await fetch(file,{method:"HEAD",cache:"no-store"});
+      return res.ok;
+    }catch(e){return false;}
+  }
+
+  let files=a[6].map(z=>phonemeFile(z[1]));
+  let checks=await Promise.all(files.map(exists));
+  let allReal=checks.every(Boolean);
+  let m=document.getElementById("phonicsNote");
+
+  if(allReal){
+    if(m)m.textContent="🎧 Nghe từng âm → ghép thành từ";
+    for(let z of a[6]){
+      await playPhoneme(z[1]);
+      await new Promise(x=>setTimeout(x,90));
+    }
+    await new Promise(x=>setTimeout(x,180));
+  }else{
+    if(m)m.textContent="🔊 Chưa có phoneme MP3: nghe cả từ chậm → bình thường";
+  }
+
+  await utter(a[2].toLowerCase(),Math.max(.30,r.blend-.12));
+  await new Promise(x=>setTimeout(x,260));
   await utter(a[2].toLowerCase(),r.word);
 }
+
 function tabs(){document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.mode===mode))}
 function progress(n,total){bar.style.width=(n/total*100)+"%";counter.textContent=n+" / "+total}
 function showMode(m){mode=m;tabs();render()}
 function move(d){i=(i+d+T.items.length)%T.items.length;buildPicked=[];render();scrollTo({top:0,behavior:"smooth"})}
 function dots(){return T.items.map((_,j)=>`<span class="dot ${j===i?"on":""}"></span>`).join("")}
-function renderLesson(){let a=T.items[i];progress(i+1,T.items.length);panel.innerHTML=`<div class="topline"><h1>1. Sound & Blend 🔊</h1><div class="tag">${T.icon} ${T.title}</div></div><p class="instruction">Tap a sound and hear it in the whole word!</p><p class="vn">Bấm vào từng âm để nghe từ thật chậm. IPA bên dưới là âm chuẩn.</p><div class="showcase"><div class="picture">${a[1]}</div><div><div class="bigword">${a[2]}</div><div class="ipa">${a[3]}</div><button class="speaker" onclick="say('${a[2].toLowerCase()}')">🔊</button><div class="sentence"><b>${a[5]}</b><br>${a[4]}</div></div></div><div class="speedbox"><b>🔊 Voice:</b><button class="speedbtn ${speedMode==="slow"?"active":""}" onclick="setSpeed('slow')">🐢 Slow</button><button class="speedbtn ${speedMode==="normal"?"active":""}" onclick="setSpeed('normal')">Normal</button></div><div class="tiles">${a[6].map((z,j)=>`<div class="tile" onclick="sound(${j})"><div class="letter">${z[0]}</div><button class="speaker">🔊</button><div class="sound">${z[1]}</div></div>`).join("")}</div><button class="blend" onclick="blend()">🔊 SLOW → WORD</button><div class="wordnav"><button class="btn pink" onclick="move(-1)">← Previous</button><button class="btn" onclick="move(1)">Next →</button></div><div class="dots">${dots()}</div>`}
+function renderLesson(){let a=T.items[i];progress(i+1,T.items.length);panel.innerHTML=`<div class="topline"><h1>1. Sound & Blend 🔊</h1><div class="tag">${T.icon} ${T.title}</div></div><p class="instruction">Look at each sound, then tap BLEND to hear the word!</p><p class="vn">Nhìn từng âm + IPA. Nếu có recording chuẩn, bấm từng âm để nghe; bấm BLEND để nghe cả từ chậm → bình thường.</p><div class="showcase"><div class="picture">${a[1]}</div><div><div class="bigword">${a[2]}</div><div class="ipa">${a[3]}</div><button class="speaker" onclick="say('${a[2].toLowerCase()}')">🔊</button><div class="sentence"><b>${a[5]}</b><br>${a[4]}</div></div></div><div class="speedbox"><b>🔊 Voice:</b><button class="speedbtn ${speedMode==="slow"?"active":""}" onclick="setSpeed('slow')">🐢 Slow</button><button class="speedbtn ${speedMode==="normal"?"active":""}" onclick="setSpeed('normal')">Normal</button></div><div class="tiles">${a[6].map((z,j)=>`<div class="tile" onclick="sound(${j})"><div class="letter">${z[0]}</div><button class="speaker">🔊</button><div class="sound">${z[1]}</div></div>`).join("")}</div><div class="vn" id="phonicsNote">🇺🇸 US English • IPA chuẩn • Không dùng TTS giả phoneme</div><button class="blend" onclick="blend()">🔊 BLEND!</button><div class="wordnav"><button class="btn pink" onclick="move(-1)">← Previous</button><button class="btn" onclick="move(1)">Next →</button></div><div class="dots">${dots()}</div>`}
 function shuffledLetters(word){let a=word.split("").map((c,n)=>({c,n}));for(let j=a.length-1;j>0;j--){let k=Math.floor(Math.random()*(j+1));[a[j],a[k]]=[a[k],a[j]]}if(a.map(x=>x.c).join("")===word&&word.length>1)[a[0],a[1]]=[a[1],a[0]];return a}
 let bank=[];
 function renderBuild(reset=true){let a=T.items[i];progress(i+1,T.items.length);if(reset){buildPicked=[];bank=shuffledLetters(a[2])}panel.innerHTML=`<h1>2. Build the Word 🔤</h1><div class="tag">${T.icon} ${T.title}</div><p class="instruction">Put the letters in the right order.</p><p class="vn">Sắp xếp các chữ cái để tạo thành từ đúng.</p><div class="gamepic">${a[1]}</div><button class="speaker" onclick="say('${a[2].toLowerCase()}')">🔊</button><div class="buildslots">${a[2].split("").map((_,j)=>`<div class="slot" onclick="undoBuild()">${buildPicked[j]?.c||"_"}</div>`).join("")}</div><div class="buildbank">${bank.filter(x=>!buildPicked.some(p=>p.n===x.n)).map(x=>`<button class="letterchip" onclick="pickBuild(${x.n})">${x.c}</button>`).join("")}</div><div class="message" id="msg"></div><button class="btn pink" onclick="resetBuild()">↻ Mix again</button><div class="wordnav"><button class="btn" onclick="move(-1)">← Previous</button><button class="btn" onclick="move(1)">Next →</button></div>`}
